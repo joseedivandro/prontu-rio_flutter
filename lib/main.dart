@@ -92,59 +92,6 @@ class FuncionarioListScreen extends StatelessWidget {
   }
 }
 
-class FuncionarioAddEditScreen extends StatelessWidget {
-  final Funcionario? funcionario;
-  final FuncionarioProvider provider = FuncionarioProvider();
-
-  FuncionarioAddEditScreen({this.funcionario});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          funcionario != null ? 'Editar Funcionario' : 'Adicionar Funcionario',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 16),
-            FuncionarioForm(funcionario: funcionario),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Funcionario? novoFuncionario = await Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => FuncionarioForm(funcionario: funcionario),
-            ),
-          );
-
-          if (novoFuncionario != null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Funcionario ${novoFuncionario.nome} criado/editado com sucesso!'),
-              ),
-            );
-          }
-
-          Navigator.pop(context, novoFuncionario);
-        },
-      ),
-    );
-  }
-}
-
 
 class FuncionarioDetailScreen extends StatelessWidget {
   final Funcionario funcionario;
@@ -164,7 +111,7 @@ class FuncionarioDetailScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => FuncionarioAddEditScreen(funcionario: funcionario),
+                  builder: (context) => FuncionarioForm(funcionario: funcionario),
                 ),
               );
             },

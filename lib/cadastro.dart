@@ -4,6 +4,12 @@ import 'package:prontuario_flutter/funcionario.dart';
 import 'package:prontuario_flutter/main.dart';
 import 'package:prontuario_flutter/services/patient_provider.dart';
 
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:prontuario_flutter/funcionario.dart';
+import 'package:prontuario_flutter/main.dart';
+import 'package:prontuario_flutter/services/patient_provider.dart';
+
 class FuncionarioForm extends StatefulWidget {
   final Funcionario? funcionario;
 
@@ -28,6 +34,18 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
   @override
   Widget build(BuildContext context) {
     String pageTitle = widget.funcionario != null ? 'Editar Funcionario' : 'Adicionar Funcionario';
+
+    // Preencher os controladores se estiver editando
+    if (widget.funcionario != null) {
+      _cpfController.text = widget.funcionario!.cpf;
+      _nomeController.text = widget.funcionario!.nome;
+      _enderecoController.text = widget.funcionario!.endereco;
+      _emailController.text = widget.funcionario!.email;
+      _cargoController.text = widget.funcionario!.cargo;
+      _idController.text = widget.funcionario!.id;
+      _selectedDate = widget.funcionario!.dataNascimento;
+      _dataNascimentoController.text = DateFormat('dd/MM/yyyy').format(_selectedDate!);
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -134,10 +152,15 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
                     );
 
                     try {
-                      await provider.create(funcionario);
+                      if (widget.funcionario != null) {
+                        await provider.put(widget.funcionario!.id, funcionario);
+                      } else {
+                        await provider.create(funcionario);
+                      }
+
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Funcionário criado com sucesso!'),
+                          content: Text('Funcionário ${widget.funcionario != null ? 'editado' : 'criado'} com sucesso!'),
                         ),
                       );
                       Navigator.pushReplacement(
@@ -147,10 +170,10 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
                         ),
                       );
                     } catch (e) {
-                      print('Error creating funcionario: $e');
+                      print('Error ${widget.funcionario != null ? 'editing' : 'creating'} funcionario: $e');
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Erro ao criar funcionário. Tente novamente.'),
+                          content: Text('Erro ao ${widget.funcionario != null ? 'editar' : 'criar'} funcionário. Tente novamente.'),
                         ),
                       );
                     }
