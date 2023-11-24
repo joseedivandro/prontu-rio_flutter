@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:prontuario_flutter/funcionario.dart';
+import 'package:prontuario_flutter/helper/funcionario_helper.dart';
+import 'package:prontuario_flutter/model/funcionario.dart';
 import 'package:prontuario_flutter/main.dart';
-import 'package:prontuario_flutter/services/patient_provider.dart';
+import 'package:prontuario_flutter/repositories/patient_provider.dart';
 
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:prontuario_flutter/funcionario.dart';
-import 'package:prontuario_flutter/main.dart';
-import 'package:prontuario_flutter/services/patient_provider.dart';
 
 class FuncionarioForm extends StatefulWidget {
   final Funcionario? funcionario;
@@ -29,7 +25,14 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
   final _cargoController = TextEditingController();
   final _idController = TextEditingController();
   DateTime? _selectedDate;
-  final provider = FuncionarioProvider();
+  final FuncionarioHelper helper = FuncionarioHelper();
+  late final FuncionarioProvider provider;
+
+  _FuncionarioFormState(){
+    provider = FuncionarioProvider(helper: helper);
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -142,13 +145,13 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
                 onPressed: () async {
                   if (_formKey.currentState?.validate() ?? false) {
                     final funcionario = Funcionario(
-                      cpf: _cpfController.text,
-                      nome: _nomeController.text,
-                      dataNascimento: _selectedDate ?? DateTime.now(),
-                      endereco: _enderecoController.text,
-                      email: _emailController.text,
-                      cargo: _cargoController.text,
-                      id: _idController.text,
+                      _cpfController.text,
+                       _nomeController.text,
+                      _selectedDate ?? DateTime.now(),
+                      _enderecoController.text,
+                     _emailController.text,
+                      _cargoController.text,
+                    _idController.text,
                     );
 
                     try {
