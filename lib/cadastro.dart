@@ -35,7 +35,6 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
   Widget build(BuildContext context) {
     String pageTitle = widget.funcionario != null ? 'Editar Funcionario' : 'Adicionar Funcionario';
 
-    // Preencher os controladores se estiver editando
     if (widget.funcionario != null) {
       _cpfController.text = widget.funcionario!.cpf;
       _nomeController.text = widget.funcionario!.nome;

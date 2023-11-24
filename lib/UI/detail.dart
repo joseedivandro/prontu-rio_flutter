@@ -59,10 +59,9 @@ class FuncionarioDetailScreen extends StatelessWidget {
               );
 
               if (confirmar == true) {
-                // Remova o funcionário da lista
+           
                 await provider.delete(funcionario.id);
 
-                // Exibe a mensagem
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Funcionario ${funcionario.nome} deletado com sucesso!'),

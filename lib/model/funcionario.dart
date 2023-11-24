@@ -44,7 +44,7 @@ class Funcionario {
     return {
       'cpf': cpf,
       'nome': nome,
-      'dataNascimento': dataNascimento.toIso8601String(), // Função para formatar a data como String
+      'dataNascimento': dataNascimento.toIso8601String(),
       'endereco': endereco,
       'email': email,
       'cargo': cargo,
@@ -53,6 +53,6 @@ class Funcionario {
   }
 
   String _formatDate(DateTime date) {
-    return DateFormat('yyyy-MM-dd').format(date); // ou o formato que seu backend espera
+    return DateFormat('yyyy-MM-dd').format(date);
   }
 }
