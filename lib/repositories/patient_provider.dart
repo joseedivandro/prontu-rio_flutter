@@ -24,7 +24,7 @@ class FuncionarioProvider  {
         return helper.getAll();
       } 
       
-    throw Exception("kkkkkkkkkkkkkkkkkkkkk");
+    throw Exception();
   } 
   
    Future<List> create(Funcionario funcionario ) async {

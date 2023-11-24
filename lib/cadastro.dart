@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:prontuario_flutter/helper/funcionario_helper.dart';
-import 'package:prontuario_flutter/model/funcionario.dart';
 import 'package:prontuario_flutter/main.dart';
+import 'package:prontuario_flutter/model/funcionario.dart';
 import 'package:prontuario_flutter/repositories/patient_provider.dart';
 
 
@@ -25,15 +25,12 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
   final _cargoController = TextEditingController();
   final _idController = TextEditingController();
   DateTime? _selectedDate;
-  final FuncionarioHelper helper = FuncionarioHelper();
+  final FuncionarioHelper helper = FuncionarioHelper(); 
   late final FuncionarioProvider provider;
 
   _FuncionarioFormState(){
     provider = FuncionarioProvider(helper: helper);
   }
-
-
-
   @override
   Widget build(BuildContext context) {
     String pageTitle = widget.funcionario != null ? 'Editar Funcionario' : 'Adicionar Funcionario';
@@ -69,27 +66,27 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
             children: [
               TextFormField(
                 controller: _cpfController,
-                decoration: const InputDecoration(labelText: 'CPF'),
+                decoration: InputDecoration(labelText: 'CPF'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Por favor, insira seu CPF';
+                    return 'Please enter your CPF';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _nomeController,
-                decoration: const InputDecoration(labelText: 'Nome'),
+                decoration: InputDecoration(labelText: 'Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Por favor, insira seu nome';
+                    return 'Please enter your nome';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _dataNascimentoController,
-                decoration: const InputDecoration(labelText: 'Data de nascimento'),
+                decoration: InputDecoration(labelText: 'Birth Date'),
                 onTap: () async {
                   DateTime? pickedDate = await showDatePicker(
                     context: context,
@@ -106,55 +103,53 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Por favor, insira sua data de nascimento';
+                    return 'Please select your birth date';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _enderecoController,
-                decoration: const InputDecoration(labelText: 'Endereço'),
+                decoration: InputDecoration(labelText: 'Address'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Por favor, insira seu endereco';
+                    return 'Please enter your endereco';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _emailController,
-                decoration: const InputDecoration(labelText: 'E-mail'),
+                decoration: InputDecoration(labelText: 'Email'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Por favor, insira seu email';
+                    return 'Please enter your email';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _cargoController,
-                decoration: const InputDecoration(labelText: 'Cargo'),
+                decoration: InputDecoration(labelText: 'Position'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Por favor, insira seu cargo';
+                    return 'Please enter your cargo';
                   }
                   return null;
                 },
               ),
-              const SizedBox(height: 15.0),
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState?.validate() ?? false) {
                     final funcionario = Funcionario(
                       cpf: _cpfController.text,
-                       nome: _nomeController.text,
-                      dataNascimento:_selectedDate ?? DateTime.now(),
+                      nome: _nomeController.text,
+                      dataNascimento: _selectedDate ?? DateTime.now(),
                       endereco: _enderecoController.text,
-                     email: _emailController.text,
+                      email: _emailController.text,
                       cargo: _cargoController.text,
-                    id: _idController.text,
+                      id: _idController.text,
                     );
-                    
 
                     try {
                       if (widget.funcionario != null) {
@@ -184,11 +179,7 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
                     }
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.only(top: 10.0), // Ajuste o valor conforme necessário
-                ),
-
-                child: const Text('Enviar'),
+                child: Text('Enviar'),
               ),
             ],
           ),

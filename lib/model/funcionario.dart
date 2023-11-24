@@ -12,32 +12,32 @@ class Funcionario {
   static const String coluna_cargo = "cargo";
   static const String coluna_id = "id";
 
-  String cpf = '';
-  String nome = '';
-  DateTime dataNascimento = DateTime.now();
-  String endereco = '';
-  String cargo = '';
-  String id = '';
-  String email = '';
+  String cpf;
+  String nome;
+  DateTime dataNascimento;
+  String endereco;
+  String email;
+  String cargo;
+  String id;
 
-  Funcionario(
-     this.cpf,
-     this.nome,
-     this.dataNascimento,
-     this.endereco,
-     this.email,
-     this.cargo,
-     this.id
-  );
+  Funcionario({
+    required this.cpf,
+    required this.nome,
+    required this.dataNascimento,
+    required this.endereco,
+    required this.email,
+    required this.cargo,
+    required this.id
+  });
 
   factory Funcionario.fromJson(Map<String, dynamic> json) => Funcionario(
-    json['cpf'],
-    json['nome'],
-    DateTime.parse(json['dataNascimento']),
-    json['endereco'],
-    json['email'],
-    json['cargo'],
-    json['id']
+    cpf: json['cpf'],
+    nome: json['nome'],
+    dataNascimento: DateTime.parse(json['dataNascimento']),
+    endereco: json['endereco'],
+    email: json['email'],
+    cargo: json['cargo'],
+    id: json['id']
   );
 
  Map<String, dynamic> toJSON() {
