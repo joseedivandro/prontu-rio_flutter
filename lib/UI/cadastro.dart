@@ -69,27 +69,27 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
             children: [
               TextFormField(
                 controller: _cpfController,
-                decoration: InputDecoration(labelText: 'CPF'),
+                decoration: const InputDecoration(labelText: 'CPF'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your CPF';
+                    return 'Por favor, insira seu CPF';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _nomeController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Nome'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your nome';
+                    return 'Por favor, insira seu nome';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _dataNascimentoController,
-                decoration: InputDecoration(labelText: 'Birth Date'),
+                decoration: const InputDecoration(labelText: 'Data de nascimento'),
                 onTap: () async {
                   DateTime? pickedDate = await showDatePicker(
                     context: context,
@@ -106,41 +106,42 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please select your birth date';
+                    return 'Por favor, insira sua data de nascimento';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _enderecoController,
-                decoration: InputDecoration(labelText: 'Address'),
+                decoration: const InputDecoration(labelText: 'Endereço'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your endereco';
+                    return 'Por favor, insira seu endereco';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'E-mail'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
+                    return 'Por favor, insira seu email';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _cargoController,
-                decoration: InputDecoration(labelText: 'Position'),
+                decoration: const InputDecoration(labelText: 'Cargo'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your cargo';
+                    return 'Por favor, insira seu cargo';
                   }
                   return null;
                 },
               ),
+              const SizedBox(height: 15.0),
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState?.validate() ?? false) {
@@ -153,6 +154,7 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
                       _cargoController.text,
                     _idController.text,
                     );
+                    
 
                     try {
                       if (widget.funcionario != null) {
@@ -182,7 +184,11 @@ class _FuncionarioFormState extends State<FuncionarioForm> {
                     }
                   }
                 },
-                child: Text('Enviar'),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.only(top: 10.0), // Ajuste o valor conforme necessário
+                ),
+
+                child: const Text('Enviar'),
               ),
             ],
           ),
